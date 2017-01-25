@@ -3,6 +3,19 @@ project(Team)
 
 enable_testing()
 
+include(ExternalProjects)
+
+ExternalProject_add(catch
+	GET_REPOSITORY "https://github.com/samursa/catch.git"
+	GIT_TAG "master"
+
+	SOURCE_DIR "${CMAKE_SOURCE_DIR}/dep/catch"
+	CMAKE_ARGS _DCMAKE_CXX_COMPILER:FILEPATH=${CMAKE_CXX_COMPILER} -DCMAKE_INSTALL_PREFIX=${CMAKE_SOURCE_DIR}/INSTALL/catch/ -H. -BBuild -wdev
+
+	TEST_COMMAND ""
+
+	)
+
 add_library(MathLib
 	src/Vector.h
 	src/Vector.cpp
